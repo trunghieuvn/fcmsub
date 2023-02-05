@@ -1,5 +1,6 @@
 import Foundation
 import Capacitor
+import Firebase
 
 /**
  * Please read the Capacitor iOS Plugin Development Guide
@@ -11,6 +12,8 @@ public class FcmSubPlugin: CAPPlugin {
 
     @objc func echo(_ call: CAPPluginCall) {
         let value = call.getString("value") ?? ""
+        Messaging.messaging().subscribe(toTopic: "public")
+        
         call.resolve([
             "value": implementation.echo(value)
         ])
